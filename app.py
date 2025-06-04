@@ -36,20 +36,49 @@ wahl = st.radio("Eingabemodus auswählen", ["Einzelne Eingabe", "Datei zum Verar
 # === Funktion für Einzeldateneingabe ===
 def nutzereingabe():
     gender = st.selectbox("Geschlecht", [0, 1], format_func=lambda x: "Männlich" if x == 1 else "Weiblich")
+    st.caption("Geschlecht des Kunden: 0 = Weiblich, 1 = Männlich")
+
     SeniorCitizen = st.selectbox("Senior (65+)?", [0, 1])
+    st.caption("Ist der Kunde 65 Jahre oder älter? 1 = Ja, 0 = Nein")
+
     Partner = st.selectbox("Hat Partner?", [0, 1])
+    st.caption("Hat der Kunde einen Ehepartner oder Lebenspartner? 1 = Ja, 0 = Nein")
+
     Dependents = st.selectbox("Hat Angehörige?", [0, 1])
+    st.caption("Hat der Kunde Angehörige wie Kinder oder andere Abhängige?")
+
     tenure = st.slider("Vertragsdauer (Monate)", 0, 72, 12)
+    st.caption("Wie viele Monate war der Kunde bereits beim Anbieter?")
+
     PhoneService = st.selectbox("Telefonservice", [0, 1])
+    st.caption("Hat der Kunde einen aktiven Telefonservice?")
+
     OnlineSecurity = st.selectbox("Online-Sicherheit", [0, 1])
+    st.caption("Verfügt der Kunde über einen Online-Sicherheitsdienst wie Firewall oder Antivirus?")
+
     OnlineBackup = st.selectbox("Online-Backup", [0, 1])
+    st.caption("Nutzt der Kunde Online-Datensicherung?")
+
     DeviceProtection = st.selectbox("Geräteschutz", [0, 1])
+    st.caption("Hat der Kunde eine Geräteschutzversicherung?")
+
     TechSupport = st.selectbox("Technischer Support", [0, 1])
+    st.caption("Nutzt der Kunde technischen Support-Dienstleistungen?")
+
     StreamingTV = st.selectbox("Streaming-TV", [0, 1])
+    st.caption("Verwendet der Kunde Streaming-TV-Dienste?")
+
     StreamingMovies = st.selectbox("Streaming-Filme", [0, 1])
+    st.caption("Verwendet der Kunde Streaming-Filmangebote?")
+
     PaperlessBilling = st.selectbox("Papierlose Rechnung", [0, 1])
+    st.caption("Erhält der Kunde Rechnungen nur digital ohne Papier?")
+
     MonthlyCharges = st.number_input("Monatliche Kosten (€)", min_value=0.0, value=50.0)
+    st.caption("Wie viel zahlt der Kunde monatlich?")
+
     TotalCharges = st.number_input("Gesamtkosten (€)", min_value=0.0, value=500.0)
+    st.caption("Wie viel hat der Kunde insgesamt bezahlt?")
 
     internet_optionen = {
         'DSL': [1, 0, 0],
@@ -57,6 +86,7 @@ def nutzereingabe():
         'Keine': [0, 0, 1]
     }
     internet = st.selectbox("Internetservice", list(internet_optionen.keys()))
+    st.caption("Welchen Internetservice verwendet der Kunde?")
     InternetService_DSL, InternetService_Fiber_optic, InternetService_No = internet_optionen[internet]
 
     vertrag_optionen = {
@@ -65,6 +95,7 @@ def nutzereingabe():
         'Zwei Jahre': [0, 0, 1]
     }
     vertrag = st.selectbox("Vertragsart", list(vertrag_optionen.keys()))
+    st.caption("Wie lange läuft der Vertrag des Kunden?")
     Contract_Month_to_month, Contract_One_year, Contract_Two_year = vertrag_optionen[vertrag]
 
     zahlung_optionen = {
@@ -74,6 +105,7 @@ def nutzereingabe():
         'Post-Scheck': [0, 0, 0, 1]
     }
     zahlung = st.selectbox("Zahlungsmethode", list(zahlung_optionen.keys()))
+    st.caption("Welche Zahlungsmethode verwendet der Kunde?")
     PaymentMethod_Bank_transfer, PaymentMethod_Credit_card, PaymentMethod_Electronic_check, PaymentMethod_Mailed_check = zahlung_optionen[zahlung]
 
     lines_optionen = {
@@ -82,6 +114,7 @@ def nutzereingabe():
         'Ja': [0, 0, 1]
     }
     lines = st.selectbox("Mehrere Leitungen", list(lines_optionen.keys()))
+    st.caption("Verfügt der Kunde über mehrere Telefonleitungen?")
     MultipleLines_No, MultipleLines_No_phone, MultipleLines_Yes = lines_optionen[lines]
 
     daten = np.array([[gender, SeniorCitizen, Partner, Dependents, tenure, PhoneService,
